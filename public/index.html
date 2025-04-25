@@ -906,7 +906,7 @@
         // Close confirmation modal
         cancelDelete.addEventListener("click", () => confirmationModal.classList.add("hidden"));
 
-        // Save Alerte
+        // Modification du code de sauvegarde d'alerte (POST/PUT)
         modalSave.addEventListener("click", async () => {
             if (!validateForm()) {
                 showToast("Veuillez remplir tous les champs requis", "error");
@@ -945,6 +945,7 @@
                 }
 
                 const data = await response.json();
+                console.log("Réponse API:", data); // Pour le débogage
 
                 if (data.success) {
                     showToast(message, "success");
@@ -959,7 +960,7 @@
             }
         });
 
-        // Confirm Delete
+        // Modification du code de suppression d'alerte (DELETE)
         confirmDelete.addEventListener("click", async () => {
             if (!currentDeleteId) return;
 
@@ -969,6 +970,7 @@
                 });
 
                 const data = await response.json();
+                console.log("Réponse API (suppression):", data); // Pour le débogage
 
                 if (data.success) {
                     showToast("Alerte supprimée avec succès", "success");
@@ -982,7 +984,6 @@
                 showToast("Erreur de connexion au serveur", "error");
             }
         });
-
         // Load Alertes
         async function chargerAlertes() {
             alerteContent.innerHTML = `
