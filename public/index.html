@@ -500,7 +500,6 @@
                 transform: translateX(100%);
                 opacity: 0;
             }
-
             to {
                 transform: translateX(0);
                 opacity: 1;
@@ -512,7 +511,6 @@
                 transform: translateX(0);
                 opacity: 1;
             }
-
             to {
                 transform: translateX(100%);
                 opacity: 0;
@@ -795,8 +793,7 @@
                     <input type="hidden" id="alerte-id">
                     <div class="form-group">
                         <label for="alerte-type">Type d'alerte</label>
-                        <input type="text" id="alerte-type" class="form-control" required
-                            placeholder="Ex: Vague de tempête">
+                        <input type="text" id="alerte-type" class="form-control" required placeholder="Ex: Vague de tempête">
                     </div>
                     <div class="form-group">
                         <label for="alerte-niveau">Niveau</label>
@@ -809,8 +806,7 @@
                     </div>
                     <div class="form-group">
                         <label for="alerte-zone">Zone</label>
-                        <input type="text" id="alerte-zone" class="form-control" required
-                            placeholder="Ex: Côte Normande">
+                        <input type="text" id="alerte-zone" class="form-control" required placeholder="Ex: Côte Normande">
                     </div>
                     <div class="form-group">
                         <label for="alerte-debut">Date et heure de début</label>
@@ -822,8 +818,7 @@
                     </div>
                     <div class="form-group">
                         <label for="alerte-description">Description</label>
-                        <textarea id="alerte-description" class="form-control" required
-                            placeholder="Description détaillée de l'alerte..."></textarea>
+                        <textarea id="alerte-description" class="form-control" required placeholder="Description détaillée de l'alerte..."></textarea>
                     </div>
                 </form>
             </div>
@@ -841,8 +836,7 @@
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
             <h3 class="confirmation-title">Confirmer la suppression</h3>
-            <p class="confirmation-message">Êtes-vous sûr de vouloir supprimer cette alerte ? Cette action est
-                irréversible.</p>
+            <p class="confirmation-message">Êtes-vous sûr de vouloir supprimer cette alerte ? Cette action est irréversible.</p>
             <div class="confirmation-actions">
                 <button class="btn btn-primary" id="cancel-delete">Annuler</button>
                 <button class="btn btn-danger" id="confirm-delete">Supprimer</button>
@@ -874,7 +868,7 @@
         const confirmationModal = document.getElementById("confirmation-modal");
         const cancelDelete = document.getElementById("cancel-delete");
         const confirmDelete = document.getElementById("confirm-delete");
-
+        
         // Form fields
         const alerteIdInput = document.getElementById("alerte-id");
         const alerteTypeInput = document.getElementById("alerte-type");
@@ -906,7 +900,7 @@
         // Close confirmation modal
         cancelDelete.addEventListener("click", () => confirmationModal.classList.add("hidden"));
 
-        // Modification du code de sauvegarde d'alerte (POST/PUT)
+        // Save Alerte
         modalSave.addEventListener("click", async () => {
             if (!validateForm()) {
                 showToast("Veuillez remplir tous les champs requis", "error");
@@ -945,8 +939,7 @@
                 }
 
                 const data = await response.json();
-                console.log("Réponse API:", data); // Pour le débogage
-
+                
                 if (data.success) {
                     showToast(message, "success");
                     alerteModal.classList.add("hidden");
@@ -960,18 +953,17 @@
             }
         });
 
-        // Modification du code de suppression d'alerte (DELETE)
+        // Confirm Delete
         confirmDelete.addEventListener("click", async () => {
             if (!currentDeleteId) return;
-
+            
             try {
                 const response = await fetch(`${API_URL}?id=${currentDeleteId}`, {
                     method: "DELETE"
                 });
-
+                
                 const data = await response.json();
-                console.log("Réponse API (suppression):", data); // Pour le débogage
-
+                
                 if (data.success) {
                     showToast("Alerte supprimée avec succès", "success");
                     confirmationModal.classList.add("hidden");
@@ -984,45 +976,42 @@
                 showToast("Erreur de connexion au serveur", "error");
             }
         });
+
         // Load Alertes
         async function chargerAlertes() {
             alerteContent.innerHTML = `
-        <div class="loading">
-            <i class="fas fa-spinner"></i>
-            <span>Chargement des données...</span>
-        </div>
-    `;
-
+                <div class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <span>Chargement des données...</span>
+                </div>
+            `;
+            
             try {
                 const response = await fetch(API_URL);
                 const data = await response.json();
-
-                // Vérifier si data est un tableau (votre API renvoie directement un tableau)
-                if (Array.isArray(data)) {
-                    alertes = data;
-                    renderAlertes();
-                } else if (data.success && data.alertes) {
-                    // Garder la compatibilité avec le format que vous attendiez initialement
+                
+                if (data.success && data.alertes) {
                     alertes = data.alertes;
                     renderAlertes();
                 } else {
                     alerteContent.innerHTML = `
-                <div class="error">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span>Impossible de charger les alertes</span>
-                </div>
-            `;
+                        <div class="error">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Impossible de charger les alertes</span>
+                        </div>
+                    `;
                 }
             } catch (error) {
                 console.error("Erreur:", error);
                 alerteContent.innerHTML = `
-            <div class="error">
-                <i class="fas fa-exclamation-circle"></i>
-                <span>Erreur de connexion au serveur</span>
-            </div>
-        `;
+                    <div class="error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Erreur de connexion au serveur</span>
+                    </div>
+                `;
             }
         }
+
         // Render Alertes
         function renderAlertes() {
             if (alertes.length === 0) {
@@ -1037,14 +1026,14 @@
                 `;
                 return;
             }
-
+            
             let html = '';
-
+            
             alertes.forEach(alerte => {
                 const niveauClass = getNiveauClass(alerte.niveau);
                 const debutFormatted = formatDate(alerte.debut);
                 const finFormatted = formatDate(alerte.fin);
-
+                
                 html += `
                     <div class="alerte-container">
                         ${adminMode ? `
@@ -1082,15 +1071,15 @@
                     </div>
                 `;
             });
-
+            
             alerteContent.innerHTML = html;
         }
 
         // Edit Alerte
-        window.editAlerte = function (id) {
+        window.editAlerte = function(id) {
             const alerte = alertes.find(a => a.id === id);
             if (!alerte) return;
-
+            
             alerteIdInput.value = alerte.id;
             alerteTypeInput.value = alerte.alerte;
             alerteNiveauSelect.value = alerte.niveau;
@@ -1098,13 +1087,13 @@
             alerteDebutInput.value = formatDateTimeForInput(alerte.debut);
             alerteFinInput.value = formatDateTimeForInput(alerte.fin);
             alerteDescriptionInput.value = alerte.description;
-
+            
             modalTitle.textContent = "Modifier l'alerte";
             alerteModal.classList.remove("hidden");
         };
 
         // Delete Alerte
-        window.deleteAlerte = function (id) {
+        window.deleteAlerte = function(id) {
             currentDeleteId = id;
             confirmationModal.classList.remove("hidden");
         };
@@ -1113,12 +1102,12 @@
         function resetForm() {
             alerteForm.reset();
             alerteIdInput.value = "";
-
+            
             // Set default datetime values to today and tomorrow
             const now = new Date();
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
-
+            
             alerteDebutInput.value = formatDateTimeForInput(now);
             alerteFinInput.value = formatDateTimeForInput(tomorrow);
         }
@@ -1143,18 +1132,18 @@
         }
 
         function formatDate(dateString) {
-            const options = {
-                day: '2-digit',
-                month: '2-digit',
+            const options = { 
+                day: '2-digit', 
+                month: '2-digit', 
                 year: 'numeric',
-                hour: '2-digit',
+                hour: '2-digit', 
                 minute: '2-digit'
             };
             return new Date(dateString).toLocaleDateString('fr-FR', options).replace(',', ' à');
         }
 
         function getNiveauClass(niveau) {
-            switch (niveau) {
+            switch(niveau) {
                 case 'Vert': return '#22c55e';
                 case 'Orange': return '#f97316';
                 case 'Rouge': return '#dc2626';
@@ -1169,10 +1158,10 @@
                 <i class="fas fa-${type === "success" ? "check-circle" : type === "error" ? "exclamation-circle" : "exclamation-triangle"}"></i>
                 <span>${message}</span>
             `;
-
+            
             const toastContainer = document.getElementById("toast-container");
             toastContainer.appendChild(toast);
-
+            
             // Auto-remove after 3 seconds
             setTimeout(() => {
                 toast.style.animation = "slideOut 0.3s ease forwards";
