@@ -18,6 +18,9 @@
             --shadow: rgba(0, 0, 0, 0.1);
             --card-bg: #ffffff;
             --wave-pattern: #dbeafe;
+            --danger: #dc2626;
+            --warning: #f97316;
+            --success: #22c55e;
         }
 
         * {
@@ -296,6 +299,275 @@
             gap: 8px;
         }
 
+        /* CRUD Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--text-light);
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: var(--text-light);
+        }
+
+        .btn-danger:hover {
+            background-color: #b91c1c;
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+            color: var(--text-light);
+        }
+
+        .btn-warning:hover {
+            background-color: #ea580c;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: var(--text-light);
+        }
+
+        .btn-success:hover {
+            background-color: #16a34a;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal {
+            background-color: white;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            background: linear-gradient(to right, var(--accent), var(--secondary));
+            color: var(--text-light);
+            padding: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.2s ease;
+        }
+
+        .modal-close:hover {
+            opacity: 1;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23334155'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1em;
+            padding-right: 2.5rem;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .modal-footer {
+            padding: 1rem 2rem 2rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Toast notifications */
+        .toast-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1100;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 350px;
+        }
+
+        .toast {
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease forwards;
+            color: white;
+        }
+
+        .toast.success {
+            background-color: var(--success);
+        }
+
+        .toast.error {
+            background-color: var(--danger);
+        }
+
+        .toast.warning {
+            background-color: var(--warning);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .alerte-container {
+            position: relative;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .alerte-container:last-child {
+            margin-bottom: 0;
+        }
+
+        .alerte-actions {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-edit {
+            background-color: var(--warning);
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background-color: #ea580c;
+        }
+
+        .btn-delete {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #b91c1c;
+        }
+
         /* Responsive adjustments */
         @media (max-width: 640px) {
             .wave-container h1 {
@@ -310,6 +582,128 @@
                 grid-template-columns: 1fr;
                 gap: 0.5rem;
             }
+
+            .modal {
+                max-width: 95%;
+            }
+        }
+
+        .admin-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .admin-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .admin-mode-indicator {
+            position: fixed;
+            bottom: 25px;
+            right: 80px;
+            background-color: var(--accent);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.3s ease;
+        }
+
+        .admin-mode-indicator.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .admin-controls {
+            margin-bottom: 2rem;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .admin-controls.active {
+            opacity: 1;
+            height: auto;
+        }
+
+        .add-alerte-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .add-alerte-btn:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-alerte-btn i {
+            font-size: 1.1rem;
+        }
+
+        .confirmation-dialog {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .confirmation-icon {
+            font-size: 3rem;
+            color: var(--danger);
+            margin-bottom: 1rem;
+        }
+
+        .confirmation-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--danger);
+        }
+
+        .confirmation-message {
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+
+        .confirmation-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
         }
     </style>
 </head>
@@ -323,12 +717,19 @@
     </header>
 
     <main>
+        <div class="admin-controls">
+            <button class="add-alerte-btn" id="add-alerte-btn">
+                <i class="fas fa-plus"></i>
+                Ajouter une alerte
+            </button>
+        </div>
+
         <div class="dashboard">
             <!-- Alerte Card -->
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-exclamation-triangle"></i>
-                    Alerte en cours
+                    Alertes en cours
                 </div>
                 <div class="card-body">
                     <div id="alerte-content">
@@ -372,81 +773,410 @@
         </div>
     </footer>
 
+    <!-- Admin Mode Toggle Button -->
+    <div class="admin-toggle" id="admin-toggle">
+        <i class="fas fa-cog"></i>
+    </div>
+    <div class="admin-mode-indicator" id="admin-mode-indicator">Mode Admin</div>
+
+    <!-- Modal pour ajouter/modifier une alerte -->
+    <div class="modal-overlay hidden" id="alerte-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <span id="modal-title">Ajouter une alerte</span>
+                <button class="modal-close" id="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="alerte-form">
+                    <input type="hidden" id="alerte-id">
+                    <div class="form-group">
+                        <label for="alerte-type">Type d'alerte</label>
+                        <input type="text" id="alerte-type" class="form-control" required placeholder="Ex: Vague de tempête">
+                    </div>
+                    <div class="form-group">
+                        <label for="alerte-niveau">Niveau</label>
+                        <select id="alerte-niveau" class="form-control" required>
+                            <option value="">Choisir un niveau</option>
+                            <option value="Vert">Vert</option>
+                            <option value="Orange">Orange</option>
+                            <option value="Rouge">Rouge</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="alerte-zone">Zone</label>
+                        <input type="text" id="alerte-zone" class="form-control" required placeholder="Ex: Côte Normande">
+                    </div>
+                    <div class="form-group">
+                        <label for="alerte-debut">Date et heure de début</label>
+                        <input type="datetime-local" id="alerte-debut" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="alerte-fin">Date et heure de fin</label>
+                        <input type="datetime-local" id="alerte-fin" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="alerte-description">Description</label>
+                        <textarea id="alerte-description" class="form-control" required placeholder="Description détaillée de l'alerte..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="modal-cancel">Annuler</button>
+                <button type="button" class="btn btn-primary" id="modal-save">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation de suppression -->
+    <div class="modal-overlay hidden" id="confirmation-modal">
+        <div class="confirmation-dialog">
+            <div class="confirmation-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3 class="confirmation-title">Confirmer la suppression</h3>
+            <p class="confirmation-message">Êtes-vous sûr de vouloir supprimer cette alerte ? Cette action est irréversible.</p>
+            <div class="confirmation-actions">
+                <button class="btn btn-primary" id="cancel-delete">Annuler</button>
+                <button class="btn btn-danger" id="confirm-delete">Supprimer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
     <script>
         const API_URL = "https://api-meteo.onrender.com/api/index.php";
-      
-        async function chargerAlertes() {
-          const alerteContainer = document.getElementById("alerte-content");
-      
-          try {
-            const res = await fetch(API_URL);
-            const data = await res.json();
-      
-            if (!Array.isArray(data) || data.length === 0) {
-              throw new Error("Aucune alerte trouvée");
-            }
-      
-            // Création du HTML pour chaque alerte
-            const alertesHTML = data.map((alerte) => {
-              const [date, heure] = alerte.debut.split(" ");
-              const [finDate, finHeure] = alerte.fin.split(" ");
-      
-              // Icône selon le type d’alerte
-              let alerteIcon = "fas fa-exclamation-circle";
-              if (alerte.alerte.includes("Vague")) alerteIcon = "fas fa-water";
-              else if (alerte.alerte.includes("Vent")) alerteIcon = "fas fa-wind";
-              else if (alerte.alerte.includes("Marée")) alerteIcon = "fas fa-water";
-      
-              return `
-                <div class="alerte-info">
-                  <div class="alerte-row">
-                    <div class="alerte-label">Zone</div>
-                    <div class="alerte-value">${alerte.zone}</div>
-                  </div>
-                  <div class="alerte-row">
-                    <div class="alerte-label">Début</div>
-                    <div class="alerte-value">${date} à ${heure}</div>
-                  </div>
-                  <div class="alerte-row">
-                    <div class="alerte-label">Fin</div>
-                    <div class="alerte-value">${finDate} à ${finHeure}</div>
-                  </div>
-                  <div class="alerte-row">
-                    <div class="alerte-label">Type</div>
-                    <div class="alerte-type">
-                      <i class="${alerteIcon}"></i>
-                      ${alerte.alerte}
-                      <span class="tag" style="background-color: ${alerte.niveau === 'Rouge' ? '#dc2626' : alerte.niveau === 'Orange' ? '#f97316' : '#22c55e'}">
-                        ${alerte.niveau}
-                      </span>
-                    </div>
-                  </div>
-                  <div class="alerte-row">
-                    <div class="alerte-label">Description</div>
-                    <div class="alerte-description">${alerte.description}</div>
-                  </div>
-                </div>
-                <hr style="margin: 2rem 0;" />
-              `;
-            }).join("");
-      
-            alerteContainer.innerHTML = alertesHTML;
-      
-          } catch (err) {
-            console.error("Erreur API :", err);
-            alerteContainer.innerHTML = `
-              <div class="error">
-                <i class="fas fa-exclamation-circle"></i>
-                Impossible de charger les données météo. Veuillez réessayer ultérieurement.
-              </div>
-            `;
-          }
-        }
-      
-        window.addEventListener("DOMContentLoaded", chargerAlertes);
-      </script>
-      
+        let adminMode = false;
+        let alertes = [];
+        let currentDeleteId = null;
 
+        // DOM Elements
+        const alerteContent = document.getElementById("alerte-content");
+        const adminToggle = document.getElementById("admin-toggle");
+        const adminModeIndicator = document.getElementById("admin-mode-indicator");
+        const adminControls = document.querySelector(".admin-controls");
+        const addAlerteBtn = document.getElementById("add-alerte-btn");
+        const alerteModal = document.getElementById("alerte-modal");
+        const modalClose = document.getElementById("modal-close");
+        const modalCancel = document.getElementById("modal-cancel");
+        const modalSave = document.getElementById("modal-save");
+        const modalTitle = document.getElementById("modal-title");
+        const alerteForm = document.getElementById("alerte-form");
+        const confirmationModal = document.getElementById("confirmation-modal");
+        const cancelDelete = document.getElementById("cancel-delete");
+        const confirmDelete = document.getElementById("confirm-delete");
+        
+        // Form fields
+        const alerteIdInput = document.getElementById("alerte-id");
+        const alerteTypeInput = document.getElementById("alerte-type");
+        const alerteNiveauSelect = document.getElementById("alerte-niveau");
+        const alerteZoneInput = document.getElementById("alerte-zone");
+        const alerteDebutInput = document.getElementById("alerte-debut");
+        const alerteFinInput = document.getElementById("alerte-fin");
+        const alerteDescriptionInput = document.getElementById("alerte-description");
+
+        // Toggle admin mode
+        adminToggle.addEventListener("click", () => {
+            adminMode = !adminMode;
+            adminModeIndicator.classList.toggle("active", adminMode);
+            adminControls.classList.toggle("active", adminMode);
+            chargerAlertes(); // Reload alertes with or without admin controls
+        });
+
+        // Open Add Alerte Modal
+        addAlerteBtn.addEventListener("click", () => {
+            resetForm();
+            modalTitle.textContent = "Ajouter une alerte";
+            alerteModal.classList.remove("hidden");
+        });
+
+        // Close modal events
+        modalClose.addEventListener("click", () => alerteModal.classList.add("hidden"));
+        modalCancel.addEventListener("click", () => alerteModal.classList.add("hidden"));
+
+        // Close confirmation modal
+        cancelDelete.addEventListener("click", () => confirmationModal.classList.add("hidden"));
+
+        // Save Alerte
+        modalSave.addEventListener("click", async () => {
+            if (!validateForm()) {
+                showToast("Veuillez remplir tous les champs requis", "error");
+                return;
+            }
+
+            const alerteData = {
+                alerte: alerteTypeInput.value,
+                niveau: alerteNiveauSelect.value,
+                zone: alerteZoneInput.value,
+                debut: formatDateTimeForAPI(alerteDebutInput.value),
+                fin: formatDateTimeForAPI(alerteFinInput.value),
+                description: alerteDescriptionInput.value,
+            };
+
+            try {
+                let response;
+                let message;
+
+                if (alerteIdInput.value) {
+                    // Update
+                    response = await fetch(`${API_URL}?id=${alerteIdInput.value}`, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(alerteData)
+                    });
+                    message = "Alerte mise à jour avec succès";
+                } else {
+                    // Create
+                    response = await fetch(API_URL, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(alerteData)
+                    });
+                    message = "Alerte ajoutée avec succès";
+                }
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    showToast(message, "success");
+                    alerteModal.classList.add("hidden");
+                    chargerAlertes();
+                } else {
+                    showToast(data.message || "Une erreur est survenue", "error");
+                }
+            } catch (error) {
+                console.error("Erreur:", error);
+                showToast("Erreur de connexion au serveur", "error");
+            }
+        });
+
+        // Confirm Delete
+        confirmDelete.addEventListener("click", async () => {
+            if (!currentDeleteId) return;
+            
+            try {
+                const response = await fetch(`${API_URL}?id=${currentDeleteId}`, {
+                    method: "DELETE"
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showToast("Alerte supprimée avec succès", "success");
+                    confirmationModal.classList.add("hidden");
+                    chargerAlertes();
+                } else {
+                    showToast(data.message || "Une erreur est survenue lors de la suppression", "error");
+                }
+            } catch (error) {
+                console.error("Erreur:", error);
+                showToast("Erreur de connexion au serveur", "error");
+            }
+        });
+
+        // Load Alertes
+        async function chargerAlertes() {
+            alerteContent.innerHTML = `
+                <div class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <span>Chargement des données...</span>
+                </div>
+            `;
+            
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                
+                if (data.success && data.alertes) {
+                    alertes = data.alertes;
+                    renderAlertes();
+                } else {
+                    alerteContent.innerHTML = `
+                        <div class="error">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Impossible de charger les alertes</span>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error("Erreur:", error);
+                alerteContent.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Erreur de connexion au serveur</span>
+                    </div>
+                `;
+            }
+        }
+
+        // Render Alertes
+        function renderAlertes() {
+            if (alertes.length === 0) {
+                alerteContent.innerHTML = `
+                    <div class="status-card">
+                        <div class="status-icon" style="color: var(--success)">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3 class="status-title">Aucune alerte en cours</h3>
+                        <p class="status-text">Les conditions météorologiques sont favorables pour les activités maritimes.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            
+            alertes.forEach(alerte => {
+                const niveauClass = getNiveauClass(alerte.niveau);
+                const debutFormatted = formatDate(alerte.debut);
+                const finFormatted = formatDate(alerte.fin);
+                
+                html += `
+                    <div class="alerte-container">
+                        ${adminMode ? `
+                            <div class="alerte-actions">
+                                <button class="btn-icon btn-edit" onclick="editAlerte(${alerte.id})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-icon btn-delete" onclick="deleteAlerte(${alerte.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        ` : ''}
+                        <div class="alerte-info">
+                            <div class="alerte-row">
+                                <div class="alerte-label">Type</div>
+                                <div class="alerte-type" style="color: ${niveauClass}">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    ${alerte.alerte}
+                                    <span class="tag" style="background-color: ${niveauClass}">${alerte.niveau}</span>
+                                </div>
+                            </div>
+                            <div class="alerte-row">
+                                <div class="alerte-label">Zone</div>
+                                <div class="alerte-value">${alerte.zone}</div>
+                            </div>
+                            <div class="alerte-row">
+                                <div class="alerte-label">Période</div>
+                                <div class="alerte-value">Du ${debutFormatted} au ${finFormatted}</div>
+                            </div>
+                            <div class="alerte-row">
+                                <div class="alerte-label">Description</div>
+                                <div class="alerte-description">${alerte.description}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            alerteContent.innerHTML = html;
+        }
+
+        // Edit Alerte
+        window.editAlerte = function(id) {
+            const alerte = alertes.find(a => a.id === id);
+            if (!alerte) return;
+            
+            alerteIdInput.value = alerte.id;
+            alerteTypeInput.value = alerte.alerte;
+            alerteNiveauSelect.value = alerte.niveau;
+            alerteZoneInput.value = alerte.zone;
+            alerteDebutInput.value = formatDateTimeForInput(alerte.debut);
+            alerteFinInput.value = formatDateTimeForInput(alerte.fin);
+            alerteDescriptionInput.value = alerte.description;
+            
+            modalTitle.textContent = "Modifier l'alerte";
+            alerteModal.classList.remove("hidden");
+        };
+
+        // Delete Alerte
+        window.deleteAlerte = function(id) {
+            currentDeleteId = id;
+            confirmationModal.classList.remove("hidden");
+        };
+
+        // Helper Functions
+        function resetForm() {
+            alerteForm.reset();
+            alerteIdInput.value = "";
+            
+            // Set default datetime values to today and tomorrow
+            const now = new Date();
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            alerteDebutInput.value = formatDateTimeForInput(now);
+            alerteFinInput.value = formatDateTimeForInput(tomorrow);
+        }
+
+        function validateForm() {
+            return alerteTypeInput.value.trim() !== "" &&
+                alerteNiveauSelect.value !== "" &&
+                alerteZoneInput.value.trim() !== "" &&
+                alerteDebutInput.value !== "" &&
+                alerteFinInput.value !== "" &&
+                alerteDescriptionInput.value.trim() !== "";
+        }
+
+        function formatDateTimeForAPI(dateTimeString) {
+            const date = new Date(dateTimeString);
+            return date.toISOString().slice(0, 19).replace('T', ' ');
+        }
+
+        function formatDateTimeForInput(dateTimeString) {
+            const date = new Date(dateTimeString);
+            return date.toISOString().slice(0, 16);
+        }
+
+        function formatDate(dateString) {
+            const options = { 
+                day: '2-digit', 
+                month: '2-digit', 
+                year: 'numeric',
+                hour: '2-digit', 
+                minute: '2-digit'
+            };
+            return new Date(dateString).toLocaleDateString('fr-FR', options).replace(',', ' à');
+        }
+
+        function getNiveauClass(niveau) {
+            switch(niveau) {
+                case 'Vert': return '#22c55e';
+                case 'Orange': return '#f97316';
+                case 'Rouge': return '#dc2626';
+                default: return '#64748b';
+            }
+        }
+
+        function showToast(message, type = "success") {
+            const toast = document.createElement("div");
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-${type === "success" ? "check-circle" : type === "error" ? "exclamation-circle" : "exclamation-triangle"}"></i>
+                <span>${message}</span>
+            `;
+            
+            const toastContainer = document.getElementById("toast-container");
+            toastContainer.appendChild(toast);
+            
+            // Auto-remove after 3 seconds
+            setTimeout(() => {
+                toast.style.animation = "slideOut 0.3s ease forwards";
+                setTimeout(() => {
+                    toastContainer.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize
+        document.addEventListener("DOMContentLoaded", () => {
+            chargerAlertes();
+            resetForm();
+        });
+    </script>
 </body>
 
 </html>
