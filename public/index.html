@@ -374,77 +374,78 @@
 
     <script>
         const API_URL = "https://api-meteo.onrender.com/api/index.php";
-
+      
         async function chargerAlertes() {
-            const alerteContainer = document.getElementById("alerte-content");
-
-            try {
-                const res = await fetch(API_URL);
-                const data = await res.json();
-
-                if (!Array.isArray(data) || data.length === 0) {
-                    throw new Error("Aucune alerte trouvée");
-                }
-
-                // Création du HTML pour chaque alerte
-                const alertesHTML = data.map((alerte) => {
-                    const [date, heure] = alerte.debut.split(" ");
-                    const [finDate, finHeure] = alerte.fin.split(" ");
-
-                    // Icône selon le type d’alerte
-                    let alerteIcon = "fas fa-exclamation-circle";
-                    if (alerte.alerte.includes("Vague")) alerteIcon = "fas fa-water";
-                    else if (alerte.alerte.includes("Vent")) alerteIcon = "fas fa-wind";
-                    else if (alerte.alerte.includes("Marée")) alerteIcon = "fas fa-water";
-
-                    return `
-            <div class="alerte-info">
-              <div class="alerte-row">
-                <div class="alerte-label">Zone</div>
-                <div class="alerte-value">${alerte.zone}</div>
-              </div>
-              <div class="alerte-row">
-                <div class="alerte-label">Début</div>
-                <div class="alerte-value">${date} à ${heure}</div>
-              </div>
-              <div class="alerte-row">
-                <div class="alerte-label">Fin</div>
-                <div class="alerte-value">${finDate} à ${finHeure}</div>
-              </div>
-              <div class="alerte-row">
-                <div class="alerte-label">Type</div>
-                <div class="alerte-type">
-                  <i class="${alerteIcon}"></i>
-                  ${alerte.alerte}
-                  <span class="tag" style="background-color: ${alerte.niveau === 'Rouge' ? '#dc2626' : alerte.niveau === 'Orange' ? '#f97316' : '#22c55e'}">
-                    ${alerte.niveau}
-                  </span>
-                </div>
-              </div>
-              <div class="alerte-row">
-                <div class="alerte-label">Description</div>
-                <div class="alerte-description">${alerte.description}</div>
-              </div>
-            </div>
-            <hr style="margin: 2rem 0;" />
-          `;
-                }).join("");
-
-                alerteContainer.innerHTML = alertesHTML;
-
-            } catch (err) {
-                console.error("Erreur API :", err);
-                alerteContainer.innerHTML = `
-          <div class="error">
-            <i class="fas fa-exclamation-circle"></i>
-            Impossible de charger les données météo. Veuillez réessayer ultérieurement.
-          </div>
-        `;
+          const alerteContainer = document.getElementById("alerte-content");
+      
+          try {
+            const res = await fetch(API_URL);
+            const data = await res.json();
+      
+            if (!Array.isArray(data) || data.length === 0) {
+              throw new Error("Aucune alerte trouvée");
             }
+      
+            // Création du HTML pour chaque alerte
+            const alertesHTML = data.map((alerte) => {
+              const [date, heure] = alerte.debut.split(" ");
+              const [finDate, finHeure] = alerte.fin.split(" ");
+      
+              // Icône selon le type d’alerte
+              let alerteIcon = "fas fa-exclamation-circle";
+              if (alerte.alerte.includes("Vague")) alerteIcon = "fas fa-water";
+              else if (alerte.alerte.includes("Vent")) alerteIcon = "fas fa-wind";
+              else if (alerte.alerte.includes("Marée")) alerteIcon = "fas fa-water";
+      
+              return `
+                <div class="alerte-info">
+                  <div class="alerte-row">
+                    <div class="alerte-label">Zone</div>
+                    <div class="alerte-value">${alerte.zone}</div>
+                  </div>
+                  <div class="alerte-row">
+                    <div class="alerte-label">Début</div>
+                    <div class="alerte-value">${date} à ${heure}</div>
+                  </div>
+                  <div class="alerte-row">
+                    <div class="alerte-label">Fin</div>
+                    <div class="alerte-value">${finDate} à ${finHeure}</div>
+                  </div>
+                  <div class="alerte-row">
+                    <div class="alerte-label">Type</div>
+                    <div class="alerte-type">
+                      <i class="${alerteIcon}"></i>
+                      ${alerte.alerte}
+                      <span class="tag" style="background-color: ${alerte.niveau === 'Rouge' ? '#dc2626' : alerte.niveau === 'Orange' ? '#f97316' : '#22c55e'}">
+                        ${alerte.niveau}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="alerte-row">
+                    <div class="alerte-label">Description</div>
+                    <div class="alerte-description">${alerte.description}</div>
+                  </div>
+                </div>
+                <hr style="margin: 2rem 0;" />
+              `;
+            }).join("");
+      
+            alerteContainer.innerHTML = alertesHTML;
+      
+          } catch (err) {
+            console.error("Erreur API :", err);
+            alerteContainer.innerHTML = `
+              <div class="error">
+                <i class="fas fa-exclamation-circle"></i>
+                Impossible de charger les données météo. Veuillez réessayer ultérieurement.
+              </div>
+            `;
+          }
         }
-
+      
         window.addEventListener("DOMContentLoaded", chargerAlertes);
-    </script>
+      </script>
+      
 
 </body>
 
